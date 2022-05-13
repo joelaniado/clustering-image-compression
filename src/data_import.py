@@ -9,4 +9,5 @@ def import_image(file):
 
     proc_im = np.reshape(im, (im.shape[0] * im.shape[1], im.shape[2]))
     print('Processed image shape: {}'.format(proc_im.shape))
+    print(len(np.unique(proc_im,axis=0)))
     return proc_im, im.shape
