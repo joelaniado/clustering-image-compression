@@ -1,13 +1,13 @@
-from src.data_import import import_image
-from src.model import image_compression
+from src.web_app import webapp
 
 
 def main():
-    seed = 24
-    k = 250
-    file = "josh.jpg"
-    im, og_shape = import_image("images/input/{}".format(file))
-    image_compression(seed, k, im, og_shape, file)
+    wa = webapp()
+    wa.buildapp()
+
+    #im, og_shape = import_image("images/input/{}".format('TEST.JPG'))
+    #print(im,og_shape)
+    #image_compression(seed, k, im, og_shape, file)
 
 
 if __name__ == "__main__":
