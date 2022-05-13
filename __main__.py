@@ -1,8 +1,8 @@
-from src.data_import import test_func
+from src.data_import import import_image
 
 
 def main():
-    test_func()
+    import_image('images/josh.jpg')
 
 
 if __name__ == "__main__":
