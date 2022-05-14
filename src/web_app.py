@@ -1,5 +1,5 @@
 import sys
-
+import numpy as np
 import streamlit as st
 from src.data_import import import_image
 from src.model import image_compression
@@ -7,10 +7,11 @@ import cv2
 import os
 
 
+
 class webapp:
     def buildapp(self):
         st.title(
-            "Welcome to my image compression app, submit the image you want compressed below: "
+            "Welcome to my image compression app."
         )
         st.subheader('Please begin by reading the project description on the sidebar.')
         st.sidebar.title("Project description")
@@ -48,32 +49,34 @@ class webapp:
                 'Try it out! Select the number of colors that you want your image to have and see if you if the '
                 'quality is comparable to the original.')
             k = st.sidebar.slider(
-                "Select number of clusters:", min_value=2, max_value=200, value=30
+                "Select number of clusters:", min_value=2, max_value=255, value=30
             )
 
             if st.button("Compress"):
                 st.write(
                     "Please wait, your image is being compressed....................................................")
 
-                compressed_im = image_compression(24, k, image, shape)
+                compressed_im = image_compression(24, k, image, shape).astype(np.uint8)
                 st.image(
-                    compressed_im.astype("int32"),
+                    compressed_im,
                     caption="Compressed image.",
                     channels="BGR",
                 )
 
-                if cv2.imwrite("images/output/test.jpg", compressed_im):
-                    with open("images/output/test.jpg", "rb") as file:
+                if cv2.imwrite("images/output/temp.png", compressed_im):
+                    with open("images/output/temp.png", "rb") as file:
                         st.write(
                             "Your image has {0} unique colors in {1} pixels. Its size is around {2} Kilobytes.".format(
                                 str(k),
                                 str(shape[0] * shape[1]),
-                                str(sys.getsizeof(file)/1024),
+                                str(int(int(os.path.getsize(file.name))/1024)),
                             )
                         )
                         st.download_button(
                             label="Download compressed image.",
                             data=file,
-                            file_name="compressed_image.jpg",
+                            file_name="compressed_image.png",
                         )
-                os.remove("images/output/test.jpg")
+                os.remove("images/output/temp.png")
+
+#
