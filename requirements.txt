@@ -1,0 +1,3 @@
+numpy
+sklearn.cluster
+opencv-python
