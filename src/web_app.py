@@ -13,7 +13,7 @@ class webapp:
         # Sidebar description ------------------------------------------------------------------------------
         st.sidebar.title("Project description")
         st.sidebar.subheader(
-            "Note: JPG images not supported, please use PNG extension."
+            "Note: JPG images and Black & White pics not supported, please use PNG extension."
         )
         st.sidebar.write(
             "Images are made out of individual pixels which are represented with a numeric value to specify"
