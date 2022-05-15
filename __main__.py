@@ -2,8 +2,8 @@ from src.web_app import webapp
 
 
 def main():
-    wa = webapp()
-    wa.buildapp()
+    app = webapp()
+    app.buildapp()
 
     # im, og_shape = import_image("images/input/{}".format('TEST.JPG'))
     # print(im,og_shape)

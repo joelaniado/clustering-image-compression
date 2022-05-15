@@ -8,9 +8,9 @@ import os
 
 
 class webapp:
+    # Builds web app for demo.
     def buildapp(self):
-        st.title("Welcome to my image compression app.")
-        st.subheader("Please begin by reading the project description on the sidebar.")
+        # Sidebar description ------------------------------------------------------------------------------
         st.sidebar.title("Project description")
         st.sidebar.subheader(
             "Note: JPG images not supported, please use PNG extension."
@@ -22,12 +22,25 @@ class webapp:
             "by combining similar colors into one, we can reduce the amount of memory our picture needs."
         )
         st.sidebar.write(
-            "Try it out! Upload an image, select the number of colors to compress to and see the result!"
+            "Try it out! Upload an image, select the number of colors to compress to and see the result! I'd recommend "
+            "starting with 30 colors and see what you get!"
         )
+
+        # Main body -----------------------------------------------------------------------------------------------
+        st.title("Welcome to my image compression app.")
+        st.subheader("Please begin by reading the project description on the sidebar.")
         uploaded_file = st.file_uploader(
             "Please upload your image here.", type=["png", "PNG"]
         )
+
+        # After submitting image
         if uploaded_file is not None:
+            # Sidebar input
+            k = st.sidebar.slider(
+                "Colors selector:", min_value=2, max_value=150, value=30
+            )
+
+            # Import Image and show.
             image, shape, color_n = import_image(uploaded_file)
             st.image(uploaded_file, "Image to be compressed.")
             st.write(
@@ -37,16 +50,14 @@ class webapp:
                     str(int(uploaded_file.size / 1024)),
                 )
             )
-            k = st.sidebar.slider(
-                "Colors selector:", min_value=2, max_value=150, value=30
-            )
 
+            # Compression functionality.
             if st.button("Compress"):
                 st.write(
                     "Please wait, if the image is too big it might take a couple of minutes... "
                 )
                 st.write(
-                    "your image is being compressed...................................................."
+                    "Your image is being compressed...................................................."
                 )
                 st.write(
                     'Meanwhile think about how to finish this sentence:"If you give a moose a cupcake......"'
@@ -59,6 +70,7 @@ class webapp:
                     channels="BGR",
                 )
 
+                # Show compressed image and add download functionality.
                 if cv2.imwrite("images/output/temp.png", compressed_im):
                     with open("images/output/temp.png", "rb") as file:
                         st.write(
