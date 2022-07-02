@@ -13,7 +13,7 @@ class webapp:
         # Sidebar description ------------------------------------------------------------------------------
         st.sidebar.title("Project description")
         st.sidebar.subheader(
-            "Note: JPG images and Black & White pics not supported, please use PNG extension."
+            "Note: Due to compression issues JPG and PNG images are not supported, please transform to bmp extenson first."
         )
         st.sidebar.write(
             "Images are made out of individual pixels which are represented with a numeric value to specify"
@@ -30,7 +30,7 @@ class webapp:
         st.title("Welcome to my image compression app.")
         st.subheader("Please begin by reading the project description on the sidebar.")
         uploaded_file = st.file_uploader(
-            "Please upload your image here.", type=["png", "PNG","jpg","JPG","jpeg","bmp"]
+            "Please upload your image here.", type=["bmp"]
         )
 
         # After submitting image
