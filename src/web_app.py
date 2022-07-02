@@ -30,7 +30,7 @@ class webapp:
         st.title("Welcome to my image compression app.")
         st.subheader("Please begin by reading the project description on the sidebar.")
         uploaded_file = st.file_uploader(
-            "Please upload your image here.", type=["png", "PNG","jpg","JPG"]
+            "Please upload your image here.", type=["png", "PNG","jpg","JPG","jpeg","bmp"]
         )
 
         # After submitting image
